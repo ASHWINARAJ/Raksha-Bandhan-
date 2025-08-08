@@ -102,15 +102,18 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(0.8);
   opacity: 0;
-  pointer-events: none; /* prevents blocking clicks */
+  pointer-events: none;
   background: var(--bg1);
   border-radius: 12px;
+  width: 95vw;       /* fits almost all width */
   max-width: 700px;
+  max-height: 95vh;  /* fits almost all height */
   box-shadow: 0 20px 100px rgba(255,182,193,0.35);
   transition: all .6s ease;
   text-align: center;
   padding: 10px;
   z-index: 100;
+  overflow: auto;    /* allow scrolling if needed */
 }
 .letter-overlay.show {
   opacity: 1;
@@ -118,11 +121,15 @@
   transform: translate(-50%, -50%) scale(1);
 }
 
-  .letter-overlay img{
-    width:100%;
-    border-radius:8px;
-    margin-bottom:10px;
-  }
+  .letter-overlay img {
+  width: 100%;
+  height: auto;
+  max-width: 90vw;   /* keep some margin on sides */
+  max-height: 90vh;  /* keep some margin on top/bottom */
+  border-radius: 8px;
+  margin-bottom: 10px;
+  object-fit: contain;
+}
 
   /* Confetti canvas */
   #confetti{
