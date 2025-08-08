@@ -8,19 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Light & lovely pastels */
     --bg1: #fff8f5;
     --bg2: #ffeef1;
-    --accent: #ffb6c1; /* soft pink */
-    --accent2: #ffd59e; /* peachy gold */
+    --accent: #ffb6c1;
+    --accent2: #ffd59e;
     --glass: rgba(255,255,255,0.6);
     --card: rgba(255,255,255,0.8);
     --text: #5c4b51;
   }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
-    margin:0;
     font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
     background: radial-gradient(1000px 500px at 10% 20%, rgba(255,182,193,0.25), transparent 20%),
                 radial-gradient(800px 400px at 90% 80%, rgba(255,213,158,0.2), transparent 25%),
@@ -51,7 +49,6 @@
     border-radius:14px;
     padding:20px;
     text-align:center;
-    position:relative;
     box-shadow:0 4px 20px rgba(255,182,193,0.15);
   }
   .rakhi{
@@ -67,7 +64,7 @@
   }
   h1{
     font-size:28px;
-    margin:10px 0 4px 0;
+    margin:10px 0 4px;
     color: var(--accent2);
   }
   p.lead{font-size:15px;opacity:0.9;margin:0 0 16px}
@@ -82,6 +79,7 @@
     color:#fff;
     box-shadow: 0 6px 18px rgba(255,182,193,0.4);
     transition:transform .12s ease;
+    margin-top:10px;
   }
   .btn:active{transform:translateY(2px)}
 
@@ -105,13 +103,13 @@
     transform:translate(-50%,-50%) scale(0.8);
     opacity:0;
     background:var(--bg1);
-    border-radius:1000px;
-    
+    border-radius:12px;
     max-width:400px;
     box-shadow:0 20px 100px rgba(255,182,193,0.35);
-    
     transition: all .6s ease;
     text-align:center;
+    padding:10px;
+    z-index:100;
   }
   .letter-overlay.show{
     opacity:1;
@@ -129,36 +127,35 @@
     pointer-events:none; z-index:99;
   }
 
+  /* Envelope */
+  .envelope {
+      width: 100px;
+      height: 80px;
+      background: #ffb3c1;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s;
+      margin: 18px auto;
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+      border-radius: 8px;
+  }
+  .envelope:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 40px solid #ff8fa3;
+  }
+  .envelope:hover {
+      transform: scale(1.1);
+  }
+
   @media (max-width:860px){
     .container{grid-template-columns:1fr}
     .rakhi{width:140px;height:140px}
   }
-  
-    .envelope {
-        width: 100px;
-        height: 80px;
-        background: #ffb3c1;
-        position: relative;
-        cursor: pointer;
-        transition: transform 0.3s;
-        margin: 18px auto 18px auto; /* Added bottom margin for gap */
-        box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
-        border-radius: 8px; 
-    }
-
-    .envelope:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        border-left: 50px solid transparent;
-        border-right: 50px solid transparent;
-        border-bottom: 40px solid #ff8fa3;
-    }
-
-    .envelope:hover {
-        transform: scale(1.1);
-    }
 </style>
 </head>
 <body>
@@ -186,12 +183,12 @@
     </svg>
     <h1>Happy Raksha Bandhan!</h1>
     <p class="lead">A little love for my dear sister</p>
-    <div class="envelope" id="playBtn"></div>
-    <button class="btn" id="playBtn">👆 Surprise ✨</button>
+    <div class="envelope" id="envelopeBtn"></div>
+    <button class="btn" id="buttonBtn">👆 Surprise ✨</button>
   </div>
 
   <div class="right">
-    <div class="message" id="messageArea">
+    <div class="message">
       To my dear sister — thank you for always being there. Wishing you joy, luck, and a lifetime of smiles. Love you forever.
     </div>
   </div>
@@ -249,15 +246,17 @@ function startConfetti(){
   setTimeout(()=>{ pieces.length=0; ctx.clearRect(0,0,W,H); }, 7000);
 }
 
-/* Surprise button */
-const playBtn = document.getElementById('playBtn');
-playBtn.addEventListener('click', ()=>{
+/* Surprise function */
+function showSurprise() {
   const audio = document.getElementById('bgAudio');
   audio.play().catch(()=>{console.warn('Autoplay blocked')});
   const letter = document.getElementById('letter');
   letter.classList.add('show');
   startConfetti();
-});
+}
+
+document.getElementById('envelopeBtn').addEventListener('click', showSurprise);
+document.getElementById('buttonBtn').addEventListener('click', showSurprise);
 </script>
 </body>
 </html>
