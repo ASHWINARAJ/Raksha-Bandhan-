@@ -7,203 +7,119 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg1: #fff8f5;
-    --bg2: #ffeef1;
-    --accent: #ffb6c1;
-    --accent2: #ffd59e;
-    --glass: rgba(255,255,255,0.6);
-    --card: rgba(255,255,255,0.8);
-    --text: #5c4b51;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background: radial-gradient(1000px 500px at 10% 20%, rgba(255,182,193,0.25), transparent 20%),
-                radial-gradient(800px 400px at 90% 80%, rgba(255,213,158,0.2), transparent 25%),
-                linear-gradient(180deg,var(--bg1), var(--bg2) 80%);
-    color:var(--text);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:32px;
-  }
-
-  .container{
-    width:100%;
-    max-width:900px;
-    border-radius:18px;
-    background: var(--glass);
-    box-shadow: 0 10px 30px rgba(255,182,193,0.25);
-    padding:28px;
-    display:grid;
-    grid-template-columns: 420px 1fr;
-    gap:22px;
-    align-items:center;
-    backdrop-filter: blur(8px);
-  }
-
-  .card{
-    background: var(--card);
-    border-radius:14px;
-    padding:20px;
-    text-align:center;
-    box-shadow:0 4px 20px rgba(255,182,193,0.15);
-  }
-  .rakhi{
-    width:180px;
-    height:180px;
-    margin:0 auto;
-    animation: floaty 3.6s ease-in-out infinite;
-  }
-  @keyframes floaty{
-    0%{transform:translateY(0) rotate(-6deg)}
-    50%{transform:translateY(-10px) rotate(6deg)}
-    100%{transform:translateY(0) rotate(-6deg)}
-  }
-  h1{
-    font-size:28px;
-    margin:10px 0 4px;
-    color: var(--accent2);
-  }
-  p.lead{font-size:15px;opacity:0.9;margin:0 0 16px}
-
-  .btn{
-    border:0;
-    padding:10px 14px;
-    border-radius:10px;
-    font-weight:600;
-    cursor:pointer;
-    background:linear-gradient(90deg,var(--accent),var(--accent2));
-    color:#fff;
-    box-shadow: 0 6px 18px rgba(255,182,193,0.4);
-    transition:transform .12s ease;
-    margin-top:10px;
-  }
-  .btn:active{transform:translateY(2px)}
-
-  .right{
-    padding:18px;
-    border-radius:12px;
-    background: var(--card);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:10px;
-    box-shadow:0 4px 20px rgba(255,213,158,0.15);
-  }
-  .message{font-size:16px;line-height:1.5}
-
-  /* Letter overlay */
-  .letter-overlay{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) scale(0.8);
-    opacity:0;
-    background:var(--bg1);
-    border-radius:12px;
-    max-width: 90vw;
-    box-shadow:0 20px 100px rgba(255,182,193,0.35);
-    transition: all .6s ease;
-    text-align:center;
-    padding:10px;
-    z-index:100;
-  }
-  .letter-overlay.show{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
-  .letter-overlay img{
-    width: 100%;
-    height: auto;
-    max-width: 90vw;    /* no wider than 90% of screen width */
-    max-height: 80vh;   /* no taller than 80% of screen height */
-    object-fit: contain; /* keep proportions, no stretch */
-    border-radius:8px;
-    margin-bottom:10px;
+:root {
+  --bg1: #fff8f5;
+  --bg2: #ffeef1;
+  --accent: #ffb6c1;
+  --accent2: #ffd59e;
+  --glass: rgba(255,255,255,0.6);
+  --card: rgba(255,255,255,0.8);
+  --text: #5c4b51;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: linear-gradient(180deg,var(--bg1), var(--bg2) 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.container {
+  text-align: center;
+}
+h1 {
+  color: var(--accent2);
+  margin-bottom: 10px;
 }
 
-  /* Confetti canvas */
-  #confetti{
-    position:fixed; left:0; top:0; width:100%; height:100%;
-    pointer-events:none; z-index:99;
-  }
+/* Envelope base */
+.envelope {
+  position: relative;
+  width: 200px;
+  height: 140px;
+  background: var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: var(--accent);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 2;
+}
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+.envelope .body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  z-index: 1;
+}
 
-  /* Envelope */
-  .envelope {
-      width: 100px;
-      height: 80px;
-      background: #ffb3c1;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s;
-      margin: 18px auto;
-      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
-      border-radius: 8px;
-  }
-  .envelope:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-left: 50px solid transparent;
-      border-right: 50px solid transparent;
-      border-bottom: 40px solid #ff8fa3;
-  }
-  .envelope:hover {
-      transform: scale(1.1);
-  }
+/* Letter overlay */
+.letter-overlay {
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0.8);
+  opacity:0;
+  background:var(--bg1);
+  border-radius:12px;
+  max-width:400px;
+  box-shadow:0 20px 100px rgba(255,182,193,0.35);
+  transition: all .6s ease;
+  text-align:center;
+  padding:10px;
+  z-index:100;
+}
+.letter-overlay.show {
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+}
+.letter-overlay img {
+  width:100%;
+  border-radius:8px;
+}
 
-  @media (max-width:860px){
-    .container{grid-template-columns:1fr}
-    .rakhi{width:140px;height:140px}
-  }
+/* Confetti */
+#confetti {
+  position:fixed; left:0; top:0; width:100%; height:100%;
+  pointer-events:none; z-index:99;
+}
 </style>
 </head>
 <body>
 <canvas id="confetti"></canvas>
 
 <div class="container">
-  <div class="card">
-    <!-- Rakhi SVG -->
-    <svg class="rakhi" viewBox="0 0 200 200">
-      <defs>
-        <radialGradient id="g1" cx="50%" cy="35%">
-          <stop offset="0%" stop-color="#fff7ed"/>
-          <stop offset="40%" stop-color="#ffe4e1"/>
-          <stop offset="100%" stop-color="#ffb6c1"/>
-        </radialGradient>
-      </defs>
-      <g transform="translate(100,100)">
-        <circle r="48" fill="url(#g1)" stroke="#fff" stroke-opacity="0.25" stroke-width="2"/>
-        <g transform="rotate(12)">
-          <circle r="14" fill="#ffd59e"/>
-          <circle r="8" fill="#fff" opacity="0.92"/>
-        </g>
-        <path d="M -100 -10 C -60 0 -10 -8 0 0 C 60 8 110 0 140 -10" stroke="#ffb6c1" stroke-width="6" stroke-linecap="round" fill="none" />
-      </g>
-    </svg>
-    <h1>Happy Raksha Bandhan!</h1>
-    <p class="lead">A little love for my dear sister</p>
-    <div class="envelope" id="envelopeBtn"></div>
-    <button class="btn" id="buttonBtn">👆 Surprise ✨</button>
-  </div>
-
-  <div class="right">
-    <div class="message">
-      To my dear sister — thank you for always being there. Wishing you joy, luck, and a lifetime of smiles. Love you forever.
-    </div>
+  <h1>Happy Raksha Bandhan!</h1>
+  <p>Tap the envelope for a surprise 🎁</p>
+  <div class="envelope" id="envelopeBtn">
+    <div class="flap"></div>
+    <div class="body"></div>
   </div>
 </div>
 
-<!-- Letter overlay -->
+<!-- Letter -->
 <div class="letter-overlay" id="letter">
-    <img src="letter.png" alt="Letter">
+  <img src="letter.png" alt="Letter">
 </div>
 
-<!-- MP3 -->
+<!-- Audio -->
 <audio id="bgAudio" src="music.mp3" preload="auto"></audio>
 
 <script>
@@ -250,17 +166,14 @@ function startConfetti(){
   setTimeout(()=>{ pieces.length=0; ctx.clearRect(0,0,W,H); }, 7000);
 }
 
-/* Surprise function */
-function showSurprise() {
+/* Click Event */
+document.getElementById('envelopeBtn').addEventListener('click', function(){
+  this.classList.add('open');
   const audio = document.getElementById('bgAudio');
-  audio.play().catch(()=>{console.warn('Autoplay blocked')});
+  audio.play().catch(()=>console.warn('Autoplay blocked'));
   const letter = document.getElementById('letter');
-  letter.classList.add('show');
-  startConfetti();
-}
-
-document.getElementById('envelopeBtn').addEventListener('click', showSurprise);
-document.getElementById('buttonBtn').addEventListener('click', showSurprise);
+  setTimeout(()=>{ letter.classList.add('show'); startConfetti(); }, 600);
+});
 </script>
 </body>
 </html>
