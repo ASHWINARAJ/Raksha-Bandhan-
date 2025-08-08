@@ -104,7 +104,7 @@
     opacity:0;
     background:var(--bg1);
     border-radius:12px;
-    max-width:400px;
+    max-width: 90vw;
     box-shadow:0 20px 100px rgba(255,182,193,0.35);
     transition: all .6s ease;
     text-align:center;
@@ -116,10 +116,14 @@
     transform:translate(-50%,-50%) scale(1);
   }
   .letter-overlay img{
-    width:100%;
+    width: 100%;
+    height: auto;
+    max-width: 90vw;    /* no wider than 90% of screen width */
+    max-height: 80vh;   /* no taller than 80% of screen height */
+    object-fit: contain; /* keep proportions, no stretch */
     border-radius:8px;
     margin-bottom:10px;
-  }
+}
 
   /* Confetti canvas */
   #confetti{
