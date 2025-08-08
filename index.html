@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Raksha Bandhan!</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Light & lovely pastels */
+    --bg1: #fff8f5;
+    --bg2: #ffeef1;
+    --accent: #ffb6c1; /* soft pink */
+    --accent2: #ffd59e; /* peachy gold */
+    --glass: rgba(255,255,255,0.6);
+    --card: rgba(255,255,255,0.8);
+    --text: #5c4b51;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: radial-gradient(1000px 500px at 10% 20%, rgba(255,182,193,0.25), transparent 20%),
+                radial-gradient(800px 400px at 90% 80%, rgba(255,213,158,0.2), transparent 25%),
+                linear-gradient(180deg,var(--bg1), var(--bg2) 80%);
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+  }
+
+  .container{
+    width:100%;
+    max-width:900px;
+    border-radius:18px;
+    background: var(--glass);
+    box-shadow: 0 10px 30px rgba(255,182,193,0.25);
+    padding:28px;
+    display:grid;
+    grid-template-columns: 420px 1fr;
+    gap:22px;
+    align-items:center;
+    backdrop-filter: blur(8px);
+  }
+
+  .card{
+    background: var(--card);
+    border-radius:14px;
+    padding:20px;
+    text-align:center;
+    position:relative;
+    box-shadow:0 4px 20px rgba(255,182,193,0.15);
+  }
+  .rakhi{
+    width:180px;
+    height:180px;
+    margin:0 auto;
+    animation: floaty 3.6s ease-in-out infinite;
+  }
+  @keyframes floaty{
+    0%{transform:translateY(0) rotate(-6deg)}
+    50%{transform:translateY(-10px) rotate(6deg)}
+    100%{transform:translateY(0) rotate(-6deg)}
+  }
+  h1{
+    font-size:28px;
+    margin:10px 0 4px 0;
+    color: var(--accent2);
+  }
+  p.lead{font-size:15px;opacity:0.9;margin:0 0 16px}
+
+  .btn{
+    border:0;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    color:#fff;
+    box-shadow: 0 6px 18px rgba(255,182,193,0.4);
+    transition:transform .12s ease;
+  }
+  .btn:active{transform:translateY(2px)}
+
+  .right{
+    padding:18px;
+    border-radius:12px;
+    background: var(--card);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:10px;
+    box-shadow:0 4px 20px rgba(255,213,158,0.15);
+  }
+  .message{font-size:16px;line-height:1.5}
+
+  /* Letter overlay */
+  .letter-overlay{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0.8);
+    opacity:0;
+    background:var(--bg1);
+    border-radius:1000px;
+    
+    max-width:400px;
+    box-shadow:0 20px 100px rgba(255,182,193,0.35);
+    
+    transition: all .6s ease;
+    text-align:center;
+  }
+  .letter-overlay.show{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
+  .letter-overlay img{
+    width:100%;
+    border-radius:8px;
+    margin-bottom:10px;
+  }
+
+  /* Confetti canvas */
+  #confetti{
+    position:fixed; left:0; top:0; width:100%; height:100%;
+    pointer-events:none; z-index:99;
+  }
+
+  @media (max-width:860px){
+    .container{grid-template-columns:1fr}
+    .rakhi{width:140px;height:140px}
+  }
+  
+    .envelope {
+        width: 100px;
+        height: 80px;
+        background: #ffb3c1;
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.3s;
+        margin: 18px auto 18px auto; /* Added bottom margin for gap */
+        box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+        border-radius: 8px; 
+    }
+
+    .envelope:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 40px solid #ff8fa3;
+    }
+
+    .envelope:hover {
+        transform: scale(1.1);
+    }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<div class="container">
+  <div class="card">
+    <!-- Rakhi SVG -->
+    <svg class="rakhi" viewBox="0 0 200 200">
+      <defs>
+        <radialGradient id="g1" cx="50%" cy="35%">
+          <stop offset="0%" stop-color="#fff7ed"/>
+          <stop offset="40%" stop-color="#ffe4e1"/>
+          <stop offset="100%" stop-color="#ffb6c1"/>
+        </radialGradient>
+      </defs>
+      <g transform="translate(100,100)">
+        <circle r="48" fill="url(#g1)" stroke="#fff" stroke-opacity="0.25" stroke-width="2"/>
+        <g transform="rotate(12)">
+          <circle r="14" fill="#ffd59e"/>
+          <circle r="8" fill="#fff" opacity="0.92"/>
+        </g>
+        <path d="M -100 -10 C -60 0 -10 -8 0 0 C 60 8 110 0 140 -10" stroke="#ffb6c1" stroke-width="6" stroke-linecap="round" fill="none" />
+      </g>
+    </svg>
+    <h1>Happy Raksha Bandhan!</h1>
+    <p class="lead">A little love for my dear sister</p>
+    <div class="envelope" id="playBtn"></div>
+    <button class="btn" id="playBtn">👆 Surprise ✨</button>
+  </div>
+
+  <div class="right">
+    <div class="message" id="messageArea">
+      To my dear sister — thank you for always being there. Wishing you joy, luck, and a lifetime of smiles. Love you forever.
+    </div>
+  </div>
+</div>
+
+<!-- Letter overlay -->
+<div class="letter-overlay" id="letter">
+    <img src="letter.png" alt="Letter">
+</div>
+
+<!-- MP3 -->
+<audio id="bgAudio" src="music.mp3" preload="auto"></audio>
+
+<script>
+/* Confetti setup */
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = innerWidth;
+let H = canvas.height = innerHeight;
+const pieces = [];
+function rand(min,max){ return Math.random()*(max-min)+min; }
+function makePieces(n=80){
+  for(let i=0;i<n;i++){
+    pieces.push({
+      x: rand(0,W),
+      y: rand(-H,0),
+      r: rand(6,12),
+      s: rand(1.2,3.2),
+      a: rand(0,Math.PI*2),
+      c: ['#ffb6c1','#ffd59e','#fff0f5','#ffcad4','#ffe4e1'][Math.floor(rand(0,5))]
+    });
+  }
+}
+function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
+addEventListener('resize',resize);
+function step(){
+  ctx.clearRect(0,0,W,H);
+  for(let p of pieces){
+    p.y += p.s + Math.sin(p.a)*0.6;
+    p.x += Math.cos(p.a)*0.6;
+    p.a += 0.03;
+    ctx.save();
+    ctx.translate(p.x,p.y);
+    ctx.rotate(p.a);
+    ctx.fillStyle = p.c;
+    ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+    ctx.restore();
+    if(p.y>H+20){ p.y = rand(-200,-20); p.x = rand(0,W); }
+  }
+  requestAnimationFrame(step);
+}
+function startConfetti(){
+  makePieces(90);
+  step();
+  setTimeout(()=>{ pieces.length=0; ctx.clearRect(0,0,W,H); }, 7000);
+}
+
+/* Surprise button */
+const playBtn = document.getElementById('playBtn');
+playBtn.addEventListener('click', ()=>{
+  const audio = document.getElementById('bgAudio');
+  audio.play().catch(()=>{console.warn('Autoplay blocked')});
+  const letter = document.getElementById('letter');
+  letter.classList.add('show');
+  startConfetti();
+});
+</script>
+</body>
+</html>
